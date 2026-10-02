@@ -1,1 +1,708 @@
-cxncsnmds
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Forno — Pizzeria</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --red: #c83b2f;
+            --black: #171717;
+            --gray: #6b6b6b;
+            --light: #f8f7f4;
+            --white: #ffffff;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            color: var(--black);
+            background: var(--light);
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* NAVBAR */
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(248, 247, 244, 0.92);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #e8e6e1;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: auto;
+            height: 72px;
+            padding: 0 24px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .logo span {
+            color: var(--red);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+            font-size: 14px;
+        }
+
+        .nav-links a {
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--red);
+        }
+
+        .nav-button {
+            background: var(--black);
+            color: white;
+            padding: 11px 18px;
+            border-radius: 30px;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        .nav-button:hover {
+            background: var(--red);
+        }
+
+        /* HERO */
+
+        .hero {
+            min-height: 100vh;
+            padding: 150px 24px 80px;
+
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            width: 100%;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 70px;
+            align-items: center;
+        }
+
+        .eyebrow {
+            color: var(--red);
+            font-size: 13px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 18px;
+        }
+
+        h1 {
+            font-size: clamp(55px, 8vw, 100px);
+            line-height: 0.95;
+            letter-spacing: -5px;
+            margin-bottom: 30px;
+        }
+
+        .hero-text {
+            max-width: 480px;
+            color: var(--gray);
+            font-size: 18px;
+            margin-bottom: 32px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 14px 24px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .button-primary {
+            background: var(--red);
+            color: white;
+        }
+
+        .button-primary:hover {
+            background: #a82f26;
+            transform: translateY(-2px);
+        }
+
+        .button-secondary {
+            border: 1px solid #d8d5cf;
+        }
+
+        .button-secondary:hover {
+            background: white;
+        }
+
+        .pizza-image {
+            height: 500px;
+            border-radius: 30px;
+            overflow: hidden;
+            background:
+                linear-gradient(
+                    rgba(0,0,0,0.05),
+                    rgba(0,0,0,0.05)
+                ),
+                url("https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=1200&q=85")
+                center / cover;
+        }
+
+        /* SEZIONI */
+
+        section {
+            padding: 110px 24px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            margin-bottom: 50px;
+            gap: 30px;
+        }
+
+        .section-title {
+            font-size: clamp(38px, 5vw, 60px);
+            line-height: 1;
+            letter-spacing: -3px;
+        }
+
+        .section-description {
+            max-width: 400px;
+            color: var(--gray);
+        }
+
+        /* MENU */
+
+        .menu {
+            background: white;
+        }
+
+        .pizza-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1px;
+            background: #dedbd5;
+            border: 1px solid #dedbd5;
+        }
+
+        .pizza-card {
+            background: white;
+            padding: 30px;
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            transition: 0.2s;
+        }
+
+        .pizza-card:hover {
+            background: #faf9f6;
+        }
+
+        .pizza-name {
+            font-size: 19px;
+            font-weight: bold;
+            margin-bottom: 7px;
+        }
+
+        .pizza-ingredients {
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        .price {
+            color: var(--red);
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        /* ABOUT */
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .about-image {
+            height: 520px;
+            border-radius: 30px;
+            background:
+                url("https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=1000&q=85")
+                center / cover;
+        }
+
+        .about-text p {
+            color: var(--gray);
+            margin-top: 24px;
+            font-size: 17px;
+        }
+
+        .about-number {
+            font-size: 70px;
+            font-weight: bold;
+            letter-spacing: -5px;
+            color: var(--red);
+        }
+
+        /* INFO */
+
+        .info {
+            background: var(--black);
+            color: white;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .info-item h3 {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #999;
+            margin-bottom: 15px;
+        }
+
+        .info-item p {
+            font-size: 18px;
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: var(--black);
+            color: #777;
+            border-top: 1px solid #333;
+            padding: 30px 24px;
+        }
+
+        .footer-content {
+            max-width: 1100px;
+            margin: auto;
+
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            font-size: 13px;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 800px) {
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                padding-top: 120px;
+            }
+
+            h1 {
+                letter-spacing: -3px;
+            }
+
+            .pizza-image {
+                height: 400px;
+            }
+
+            .section-header {
+                display: block;
+            }
+
+            .section-description {
+                margin-top: 20px;
+            }
+
+            .pizza-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .about-image {
+                height: 400px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+                gap: 35px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <header>
+        <nav>
+            <a href="#" class="logo">FORNO<span>.</span></a>
+
+            <ul class="nav-links">
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#chi-siamo">Chi siamo</a></li>
+                <li><a href="#contatti">Contatti</a></li>
+            </ul>
+
+            <a href="#contatti" class="nav-button">
+                Prenota
+            </a>
+        </nav>
+    </header>
+
+
+    <!-- HERO -->
+
+    <main>
+
+        <section class="hero">
+
+            <div class="hero-content">
+
+                <div>
+                    <div class="eyebrow">
+                        Pizzeria contemporanea
+                    </div>
+
+                    <h1>
+                        Pizza.<br>
+                        Semplice.
+                    </h1>
+
+                    <p class="hero-text">
+                        Ingredienti scelti, impasto a lunga lievitazione
+                        e cottura nel forno a legna.
+                        Niente di più. Niente di meno.
+                    </p>
+
+                    <div class="buttons">
+                        <a href="#menu" class="button button-primary">
+                            Scopri il menu
+                        </a>
+
+                        <a href="#contatti" class="button button-secondary">
+                            Dove siamo
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pizza-image"></div>
+
+            </div>
+
+        </section>
+
+
+        <!-- MENU -->
+
+        <section class="menu" id="menu">
+
+            <div class="container">
+
+                <div class="section-header">
+
+                    <h2 class="section-title">
+                        Il menu
+                    </h2>
+
+                    <p class="section-description">
+                        Poche pizze, ingredienti di qualità.
+                        Il nostro menu cambia seguendo
+                        le stagioni.
+                    </p>
+
+                </div>
+
+
+                <div class="pizza-grid">
+
+                    <div class="pizza-card">
+                        <div>
+                            <div class="pizza-name">
+                                Margherita
+                            </div>
+
+                            <div class="pizza-ingredients">
+                                Pomodoro, fiordilatte, basilico
+                            </div>
+                        </div>
+
+                        <div class="price">
+                            € 8
+                        </div>
+                    </div>
+
+
+                    <div class="pizza-card">
+                        <div>
+                            <div class="pizza-name">
+                                Marinara
+                            </div>
+
+                            <div class="pizza-ingredients">
+                                Pomodoro, aglio, origano
+                            </div>
+                        </div>
+
+                        <div class="price">
+                            € 7
+                        </div>
+                    </div>
+
+
+                    <div class="pizza-card">
+                        <div>
+                            <div class="pizza-name">
+                                Diavola
+                            </div>
+
+                            <div class="pizza-ingredients">
+                                Pomodoro, mozzarella, salame piccante
+                            </div>
+                        </div>
+
+                        <div class="price">
+                            € 10
+                        </div>
+                    </div>
+
+
+                    <div class="pizza-card">
+                        <div>
+                            <div class="pizza-name">
+                                Napoli
+                            </div>
+
+                            <div class="pizza-ingredients">
+                                Pomodoro, acciughe, capperi, olive
+                            </div>
+                        </div>
+
+                        <div class="price">
+                            € 10
+                        </div>
+                    </div>
+
+
+                    <div class="pizza-card">
+                        <div>
+                            <div class="pizza-name">
+                                Quattro Formaggi
+                            </div>
+
+                            <div class="pizza-ingredients">
+                                Fior di latte, gorgonzola, taleggio, parmigiano
+                            </div>
+                        </div>
+
+                        <div class="price">
+                            € 11
+                        </div>
+                    </div>
+
+
+                    <div class="pizza-card">
+                        <div>
+                            <div class="pizza-name">
+                                La Speciale
+                            </div>
+
+                            <div class="pizza-ingredients">
+                                Burrata, pomodorini, basilico, olio EVO
+                            </div>
+                        </div>
+
+                        <div class="price">
+                            € 13
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- CHI SIAMO -->
+
+        <section id="chi-siamo">
+
+            <div class="container about-grid">
+
+                <div class="about-image"></div>
+
+                <div class="about-text">
+
+                    <div class="eyebrow">
+                        La nostra storia
+                    </div>
+
+                    <div class="about-number">
+                        01
+                    </div>
+
+                    <h2 class="section-title">
+                        Pochi ingredienti.
+                        Tanto sapore.
+                    </h2>
+
+                    <p>
+                        Crediamo che una buona pizza non abbia bisogno
+                        di essere complicata.
+                    </p>
+
+                    <p>
+                        Selezioniamo farine italiane, pomodori maturati
+                        al sole e ingredienti freschi. L'impasto riposa
+                        lentamente per ottenere una pizza leggera,
+                        fragrante e piena di sapore.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- CONTATTI -->
+
+        <section class="info" id="contatti">
+
+            <div class="container">
+
+                <div class="section-header">
+
+                    <h2 class="section-title">
+                        Passa a trovarci.
+                    </h2>
+
+                </div>
+
+
+                <div class="info-grid">
+
+                    <div class="info-item">
+                        <h3>Indirizzo</h3>
+
+                        <p>
+                            Via Roma 42<br>
+                            Napoli, Italia
+                        </p>
+                    </div>
+
+
+                    <div class="info-item">
+                        <h3>Orari</h3>
+
+                        <p>
+                            Mar — Dom<br>
+                            19:00 — 23:30
+                        </p>
+                    </div>
+
+
+                    <div class="info-item">
+                        <h3>Contatti</h3>
+
+                        <p>
+                            +39 081 123 4567<br>
+                            info@fornopizzeria.it
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <div class="footer-content">
+
+            <div>
+                © 2026 FORNO.
+            </div>
+
+            <div>
+                Pizzeria contemporanea
+            </div>
+
+        </div>
+
+    </footer>
+
+</body>
+</html>
+
